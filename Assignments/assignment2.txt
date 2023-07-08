@@ -220,7 +220,7 @@ Here's some additional information about the `node_modules` folder in React:
 
 Remember to regularly update your project's dependencies, as new versions may contain bug fixes, performance improvements, or new features.
 
-In summary, the `node_modules` folder is a directory in a React project that holds the installed dependencies. It's automatically created and managed by the package manager. You don't need to interact directly with the `node_modules` folder; instead, you specify the project's dependencies in the `package.json` file, and the package manager takes care of fetching and managing the required packages in the `node_modules` folder.
+In summary, the `node_modules` folder is a directory in a React project that holds the installed dependencies. It's automatically created and managed by the package manager. You don't need to interact directly with the `node_modules` folder; instead, you specify the project's dependencies in the `package.json` file, and the package manager takes care of fetching and managing the required packages in the `node_modules` folder bla bla bla.
 
 --------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------
