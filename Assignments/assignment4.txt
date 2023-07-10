@@ -1,0 +1,169 @@
+Q.) Is JSX mandatory for React?
+Ans.) In summary, while JSX is not mandatory, it is highly recommended and commonly used in React development due to its benefits in terms of readability and productivity.
+
+--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+
+
+Q.) Is ES6 mandatory for React?
+Ans.)No, JSX is not mandatory for React, but it is the recommended way of writing React components. JSX (JavaScript XML) is a syntax extension that allows you to write HTML-like code within JavaScript. It provides a concise and familiar syntax for defining the structure and behavior of React components.
+
+JSX makes it easier to visualize the component structure, compose components, and apply JavaScript logic directly within the markup. It also enables React to efficiently update the user interface by using a virtual DOM diffing algorithm.
+
+While JSX is not strictly required to build React applications, it is widely adopted and supported by the React community. It is considered a best practice for developing React applications due to its readability, maintainability, and the advantages it provides.
+
+Without JSX, you would need to use the React.createElement() function to define React elements and components in pure JavaScript. This approach can be more verbose and less intuitive compared to using JSX.
+
+In summary, while JSX is not mandatory, it is highly recommended and commonly used in React development due to its benefits in terms of readability and productivity.
+
+Arrow functions: Arrow functions provide a concise syntax for writing function expressions, making it easier to define components, event handlers, and callback functions in React.
+
+Classes: ES6 classes provide a more familiar and convenient syntax for creating React component classes, allowing you to use the component lifecycle methods and state management more easily.
+
+Template literals: Template literals allow you to embed expressions and variables within strings using backticks (`), making it simpler to write dynamic JSX and avoid string concatenation.
+
+Destructuring assignment: Destructuring assignment allows you to extract values from arrays or objects, making it easier to access and pass down props in React components.
+
+Spread syntax: The spread syntax (...) allows you to spread the elements of an array or the properties of an object, enabling you to clone, merge, or manipulate props and state in a more concise manner.
+
+Modules: ES6 introduced a module system with import and export statements, which is commonly used for organizing and importing React components and other dependencies.
+
+--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+
+
+Q.) How can I write comments in JSX?
+Ans.) 1.) Multi-line Comments: For multi-line comments, you can use the /* */ syntax. Anything enclosed between /* and */ will be treated as a comment.
+2.) Single-line Comments: To write a single-line comment, you can use the // syntax. Anything after // on the same line will be treated as a comment.
+--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+
+
+Q.) What is <React.Fragment></React.Fragment> and <></> ?
+Ans.)In React, `<React.Fragment>` and `<>...</>` (known as the empty or shorthand fragment syntax) are used to group multiple elements without introducing an additional wrapper element in the DOM.
+
+When rendering JSX code in React, you typically return a single parent element from a component's render method. However, there are cases where you may want to return multiple elements adjacent to each other without wrapping them in a div or any other container element. Here's where `<React.Fragment>` or `<>...</>` come in handy:
+
+1. **`<React.Fragment>`**: `<React.Fragment>` is a component provided by React that allows you to group multiple elements together. It acts as an invisible wrapper and doesn't render any additional elements to the DOM.
+
+Example:
+```jsx
+import React from 'react';
+
+const MyComponent = () => {
+  return (
+    <React.Fragment>
+      <h1>Hello</h1>
+      <p>World</p>
+    </React.Fragment>
+  );
+};
+```
+
+2. **`<>...</>` (Shorthand Fragment Syntax)**: React also provides a shorthand syntax for fragments using empty tags `<>` and `</>`. This shorthand is equivalent to using `<React.Fragment>`.
+
+Example:
+```jsx
+import React from 'react';
+
+const MyComponent = () => {
+  return (
+    <>
+      <h1>Hello</h1>
+      <p>World</p>
+    </>
+  );
+};
+```
+
+Both `<React.Fragment>` and `<>...</>` serve the same purpose of grouping elements without introducing an extra DOM element. They are especially useful when you don't want to add unnecessary div wrappers or when the parent element may affect CSS styles or layout.
+
+It's important to note that fragments do not support adding keys or attributes like a regular DOM element. They are purely used for grouping purposes and don't create any additional nodes in the rendered output.
+
+--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+
+
+Q.) What is Virtual DOM?
+Ans.)The Virtual DOM, in simple terms, is a concept used by libraries like React to improve the efficiency and performance of updating the user interface in web applications.
+
+When you create a web application, you have an HTML document that represents the initial state of your UI. Whenever something changes, such as a user interaction or new data arriving, you need to update the UI to reflect those changes. Traditionally, this process involved directly manipulating the real DOM (Document Object Model) by adding, modifying, or removing elements.
+
+The Virtual DOM introduces an additional layer between your application and the actual DOM. Instead of directly modifying the DOM whenever there is a change, React creates a virtual representation of the UI, known as the Virtual DOM. This virtual representation is a lightweight copy of the real DOM and reflects the desired state of your UI.
+
+When you make changes to your application's data or state, React compares the new virtual DOM with the previous virtual DOM. It identifies the differences or updates needed to bring the virtual DOM in line with the new state. This process is called reconciliation.
+
+Once React identifies the required changes, it applies them efficiently to the real DOM, minimizing the number of actual DOM manipulations. This is achieved by determining the most optimized way to update the real DOM based on the differences found in the virtual DOM. By performing targeted updates instead of re-rendering the entire UI, React significantly improves the performance and responsiveness of the application.
+
+In summary, the Virtual DOM is a technique used by libraries like React to improve the efficiency of updating the user interface. It involves creating a virtual representation of the UI and comparing it to the previous state to determine the necessary updates. By minimizing the number of direct DOM manipulations, the Virtual DOM helps optimize performance and provides a smoother user experience.
+
+--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+
+
+Q.) What is Reconciliation in React?
+Ans.)When you make changes to your application's data or state, React compares the new virtual DOM with the previous virtual DOM. It identifies the differences or updates needed to bring the virtual DOM in line with the new state. This process is called reconciliation.
+
+--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+
+
+Q.) What is React Fiber?
+Ans.)React Fiber is a complete rewrite of the React reconciliation algorithm and core algorithm that was introduced in React 16. It is an internal reimplementation of React's core algorithm, focused on improving the performance and responsiveness of React applications, especially for complex and large-scale applications.
+
+The primary goal of React Fiber is to enable more efficient scheduling, rendering, and updating of components. It introduces a new concept called "fiber" which represents a unit of work. Each component in the component tree is broken down into individual units of work or fibers. These fibers can be prioritized, scheduled, and executed in a way that allows React to perform work incrementally, pause, and resume work as needed.
+
+--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+
+
+Q.) Why we need keys in React? When do we need keys in React?
+Ans.)In React, keys are used to uniquely identify elements in a list of components or DOM elements. They are necessary when rendering arrays of components or dynamically generating a list of elements.
+
+Keys serve two primary purposes in React:
+
+1. **Element identification**: Keys help React identify which items have changed, been added, or been removed in a list. When a list is re-rendered, React compares the new list with the previous list using the keys to determine the minimal set of changes required. Without keys, React may re-render the entire list, leading to performance issues.
+
+2. **Preserving component state**: When a list is re-rendered without keys, React will destroy the old instances of the components and create new ones. This can result in losing component state, such as form input values or scroll positions. By providing keys, React can identify and preserve the state of the corresponding components between renders.
+
+It's important to note that keys should be unique within their sibling components or elements. They should also be stable and not change between renders unless the identity of the component or element changes. Using unique and stable keys allows React to efficiently track and update components in the list.
+
+Here are some scenarios where you may need to use keys:
+
+1. **Rendering lists**: When rendering a list of components or elements dynamically, such as rendering an array of data into a set of `<li>` elements, keys are required to ensure efficient updates and preserve component state.
+
+2. **Dynamic element generation**: If you are generating dynamic elements, such as creating a set of buttons or input fields based on user input, assigning keys helps React identify the individual elements and maintain their state correctly.
+
+3. **Reordering elements**: If you have a sortable list or an array that changes order based on user interaction, using keys allows React to identify the correct elements and apply the necessary changes without re-rendering the entire list.
+
+In summary, keys are essential in React when rendering dynamic lists or generating elements dynamically. They help React efficiently track and update components, preserve component state, and avoid unnecessary re-rendering of the entire list.
+
+--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+
+
+Q.) Can we use index as keys in React?
+Ans.) https://robinpokorny.com/blog/index-as-a-key-is-an-anti-pattern/
+
+--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+
+
+Q.) What is props in React?
+Ans.) In React, props (short for properties) are a mechanism for passing data from a parent component to its child components. Props are read-only and are used to configure and customize components.
+
+By using props, you can create flexible and reusable components in React, allowing you to customize and configure component behavior based on the needs of your application.
+
+--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+
+
+Q.) What is a Config Driven UI ?
+Ans.)A Config Driven UI (User Interface) is an approach or design pattern in software development where the configuration or settings define the structure and behavior of the user interface. Instead of hardcoding the UI elements and logic, a configuration file or data is used to drive the creation and rendering of the UI components.
+
+In a Config Driven UI, the UI is defined using a declarative configuration format, typically in the form of JSON, YAML, XML, or other structured data formats. This configuration contains information about the layout, components, styles, interactions, and other aspects of the UI.
+
+--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+
+
