@@ -1,0 +1,164 @@
+Q1.) differnce between ../ and ./ in file path in vs code?
+Ans.) In file paths, `../` and `./` are special notations used to represent relative directory paths. They have different meanings and usages in VS Code (and any other file system or code editor). Let's explore the difference between the two:
+
+1. `../`:
+   - `../` represents the parent directory (one level up) from the current directory in the file system.
+   - It is used to navigate up the directory tree.
+   - For example, if you have the following directory structure:
+     ```
+     - parent_folder
+         - folder_A
+             - file_X.py
+         - folder_B
+             - file_Y.py
+     ```
+     If you are in `file_Y.py`, using `../` will allow you to access `folder_A` since it is the parent directory of `folder_B`.
+   - In VS Code, you can use `../` in file paths to traverse to the parent directory and access files or directories located one level above the current one.
+
+2. `./`:
+   - `./` represents the current directory in the file system.
+   - It is used as a reference to the current working directory.
+   - For example, if you have the following directory structure:
+     ```
+     - parent_folder
+         - folder_C
+             - file_Z.py
+         - folder_D
+             - file_W.py
+     ```
+     If you are in `file_Z.py`, using `./` will refer to the current directory `folder_C`.
+   - In VS Code, you can use `./` in file paths to explicitly refer to files or directories within the current directory.
+
+   ------------------------------------------------------------------------------------------------------------------------------------------------
+   ------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Q.) What is the difference between Named Export, Default export and * as export?
+Ans.) In JavaScript, ES6 introduced different ways to export and import modules in a more organized and efficient manner. Let's explore the differences between named export, default export, and `* as` export:
+
+1. Named Export:
+Named exports allow you to export multiple values (variables, functions, classes, objects) from a single module. When using named exports, you need to explicitly specify the names of the variables/functions/classes you want to export and import them by their exact names.
+
+Example of a module using named exports:
+
+```js
+// Module: mathUtils.js
+export const add = (a, b) => a + b;
+export const subtract = (a, b) => a - b;
+export const multiply = (a, b) => a * b;
+```
+
+```js
+// Another file: app.js
+import { add, subtract } from './mathUtils';
+
+console.log(add(5, 3)); // Output: 8
+console.log(subtract(5, 3)); // Output: 2
+```
+
+2. Default Export:
+Default export allows you to export a single value (variable, function, class, object) as the default export from a module. You can give this value any name when importing, making it more flexible.
+
+Example of a module using default export:
+
+```js
+// Module: myFunction.js
+const myFunction = () => {
+  // some code here
+};
+
+export default myFunction;
+```
+
+```js
+// Another file: app.js
+import myFunc from './myFunction';
+
+myFunc(); // Call the default exported function
+```
+
+Note that there can only be one default export per module.
+
+3. `* as` Export:
+The `* as` syntax allows you to import all the named exports from a module as properties of a single object. It is useful when you want to import multiple exports from a module and access them through a namespace.
+
+Example of a module using named exports:
+
+```js
+// Module: utils.js
+export const add = (a, b) => a + b;
+export const subtract = (a, b) => a - b;
+export const multiply = (a, b) => a * b;
+```
+
+```js
+// Another file: app.js
+import * as utils from './utils';
+
+console.log(utils.add(5, 3)); // Output: 8
+console.log(utils.subtract(5, 3)); // Output: 2
+console.log(utils.multiply(5, 3)); // Output: 15
+```
+
+In summary:
+- Named exports are used when you want to export multiple values with specific names.
+- Default export is used for a single value per module and allows you to choose any name when importing.
+- `* as` export is used when you want to import all named exports from a module as properties of a single object, providing a namespace to access them.
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q.) What is the importance of config.js file
+Ans.)In simpler terms, a `config.js` file is like a cheat sheet for a computer program or website. It holds important information and settings that the program needs to run correctly. Instead of putting these details directly into the program's code, they are stored separately in the `config.js` file.
+
+Here's why it's important:
+
+1. **Organized and Easy to Change:** By using a `config.js` file, all the important information is kept in one place, making it easy to find and change settings without digging through the entire program's code.
+
+2. **Different Settings for Different Places:** You can have different `config.js` files for different situations. For example, one for when you're working on the program, another for when you're testing it, and a third one for when it's ready to be used by others. This way, the program can behave differently based on where it's running.
+
+3. **Safety and Privacy:** Sensitive stuff, like secret passwords or special codes, can be hidden in the `config.js` file. It's like keeping your secret codes on a separate piece of paper instead of writing them on a public wall.
+
+4. **Making Life Easier for Developers:** If you're working with a team of people on the same program, everyone can use their own `config.js` file without getting in each other's way. It's like having personalized cheat sheets for each person.
+
+5. **Avoiding Mistakes:** Since configuration settings are in a separate file, it reduces the chance of accidentally messing up the program's main code while adjusting settings.
+
+6. **Taking the Program Anywhere:** With a `config.js` file, you can easily move your program from one place to another without having to rewrite parts of it. It's like carrying the cheat sheet with you wherever you go.
+
+In short, the `config.js` file keeps all the important information and settings organized and separate from the main code, making it easier to work with, more secure, and flexible for different situations. It's like a little helper that makes programming smoother and less error-prone.
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q.)What are React Hooks?
+Ans.) React Hooks are functions provided by the React library that allow developers to use state and other React features in functional components. Before Hooks were introduced in React version 16.8, state and lifecycle features were only available in class components. Hooks provide a more concise and elegant way to work with state and lifecycle behavior in functional components, making them more powerful and easier to understand.
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q.) What is state in React?
+Ans.) In React, "state" refers to an internal data management system that allows components to store and manage dynamic data. State represents the current condition or information of a component that can change over time due to user interactions, server responses, or any other triggers.
+
+State is essential in React because it enables components to be dynamic and interactive, responding to user input or changes in the application's data. When the state of a component changes, React automatically re-renders the component, updating the user interface to reflect the new state.
+
+In class components, state is managed using the this.state object, which is initialized in the constructor and can be modified using this.setState() method.
+With the introduction of React Hooks in version 16.8, functional components can also use state using the useState hook.
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Q.) Why do we need a useState Hook?
+Ans.) In simpler terms, the useState Hook in React is like a special tool that allows functional components to remember things and change them over time.
+
+Before Hooks, only class components could remember and change data, which made them more complicated to use. But with the useState Hook, functional components can now do the same thing without becoming complicated.
+
+
+
+
