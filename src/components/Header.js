@@ -1,3 +1,4 @@
+import { useState } from "react";
 import myImage from "../../images/foozo.png";
 
 const Title = () => (
@@ -7,6 +8,12 @@ const Title = () => (
 );
 
 const HeaderComponent = () => {
+  const [buttonText, setButtonText] = useState("Login");
+  const [loggedInUser, setLoggedInUser] = useState(false);
+  const toggleLoggedInUser = () => {
+    setLoggedInUser(!loggedInUser);
+    loggedInUser ? setButtonText("Logout") : setButtonText("Login");
+  };
   return (
     <div className="header">
       <Title />
@@ -16,6 +23,7 @@ const HeaderComponent = () => {
         <li>Contact</li>
         <li>Cart</li>
       </ul>
+      {<button onClick={toggleLoggedInUser}>{buttonText}</button>}
     </div>
   );
 };
