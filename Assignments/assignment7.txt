@@ -1,0 +1,13 @@
+Q1.) What is Object.values()?
+Ans.) The Object.values() static method returns an array of a given object's own enumerable string-keyed property values.
+
+eg: const object1 = {
+  a: 'somestring',
+  b: 42,
+  c: false
+};
+
+console.log(Object.values(object1));
+// output: Array ["somestring", 42, false]
+
+Q2.) Routing Explained properly in this video.

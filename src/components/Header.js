@@ -1,5 +1,6 @@
 import { useState } from "react";
-import myImage from "../../images/foozo.png";
+import { Link } from "react-router-dom";
+import myImage from "../assets/images/foozo.png";
 
 const Title = () => (
   <a href="/">
@@ -18,9 +19,16 @@ const HeaderComponent = () => {
     <div className="header">
       <Title />
       <ul>
-        <li>Home</li>
-        <li>About</li>
-        <li>Contact</li>
+        <Link to="/">
+          <li>Home</li>
+        </Link>
+        <Link to="./about">
+          <li>About</li>
+        </Link>
+        <Link to="./contact">
+          <li>Contact</li>
+        </Link>
+
         <li>Cart</li>
       </ul>
       {<button onClick={toggleLoggedInUser}>{buttonText}</button>}

@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   border: 3px solid black;
+  align-items: center;
 }
 
 .header > ul {
@@ -33,4 +34,35 @@
 .restaurant-list {
   display: flex;
   flex-wrap: wrap;
+}
+
+.shimmer {
+  height: 180px;
+  width: 180px;
+  background-color: lightgrey;
+  margin: 20px;
+}
+
+.errorDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
+}
+
+.errorMessage {
+  color: red;
+}
+
+.menu-image {
+  padding: 8px;
+  width: 350px;
+  height: 250px;
+}
+
+.restaurant-menu {
+  display: flex;
+  justify-content: space-evenly;
 }
