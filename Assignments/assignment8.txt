@@ -1,0 +1,197 @@
+● - How do you create Nested Routes react-router-dom configuration?
+
+Ans.)We can create a Nested Routes inside a react router configuration as follows: first call createBrowserRouter for routing different pages
+// import {createBrowserRouter} from "react-router-dom"
+const router = createBrowserRouter([
+   {
+      path: "/", // show path for routing
+      element: <Parent />, // show component for particular path
+      errorElement: <Error />, // show error component for path is different
+      children: [ // show children component for routing
+         {
+            path: "/path",
+            element: <Child />
+         }
+      ],
+   }
+])
+Now we can create a nested routing for /path using children again as follows:
+
+const router = createBrowserRouter([
+   {
+      path: "/",
+      element: <Parent />,
+      errorElement: <Error />,
+      children: [
+         {
+            path: "/path",
+            element: <Child />,
+            children: [ // nested routing for subchild
+               {
+                  path: "child",
+                  element: <SubChild />,
+               }
+            ],
+         }
+      ],
+   }
+])
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q.) Why do we use useEffect, explain properly.
+Ans.) useEffect is a crucial hook in React that allows you to perform side effects in functional components. Side effects are actions that happen outside the scope of rendering and updating the component's user interface. These effects can include things like data fetching, subscriptions, DOM manipulation, or any action that needs to be performed after the component has been rendered.
+
+In simpler terms, useEffect is used to handle tasks that happen alongside or after the component is displayed on the screen, such as fetching data from a server, updating the browser title, setting up event listeners, and more.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Q.) Read about createHashRouter, createMemoryRouter from React Router docs.
+Ans.)
+1.)createMemoryRouter:
+In simple terms, createMemoryRouter is a tool that helps manage the navigation of different pages or views in a web application, but it does not change the actual URL shown in the address bar of the browser. It's like having an invisible navigation system within your app.
+
+Imagine you have a web app with multiple pages, but instead of the browser's URL changing as you move between pages, the app keeps track of the pages you visit internally. So, it's like navigating through different parts of a virtual memory rather than changing the browser's address bar.
+
+The benefit of using createMemoryRouter is that you can still have multiple "pages" or "views" in your app, but the URLs won't change in the browser, making it useful for cases where you want to manage navigation without affecting the user's browser history or showing the internal structure of your app in the URL.
+
+2.) createHashRouter:
+
+In web development, routing refers to the process of determining what content to display on a web page based on the URL or other parameters. When a user visits a specific URL, the web application needs to know which content or "view" to show.
+
+Traditionally, when you navigate between different pages on a website, the entire page is reloaded, and the server serves the new content associated with the requested URL. This process can be slow and not ideal for modern, single-page applications (SPAs) where we want to provide a smoother and more responsive user experience.
+
+To overcome this limitation and create a more dynamic and seamless user interface, client-side routing was introduced. Instead of relying on the server to handle navigation, the routing logic is handled by JavaScript code running in the user's browser.
+
+Here's where createHashRouter comes into play:
+
+createHashRouter is a routing solution that uses the hash part (the part after the '#' symbol) of the URL to manage navigation within a single-page application. It's a simple and effective way to implement client-side routing without relying on the server for every page change.
+
+When you use createHashRouter, your web application's URLs will look something like this:
+
+bash
+Copy code
+example.com/#/page1
+example.com/#/page2
+example.com/#/page3
+
+The hash part of the URL (#/page1, #/page2, etc.) changes as you navigate through your app, but the browser doesn't request new pages from the server. Instead, JavaScript running in the background captures changes to the hash part of the URL and handles the appropriate actions within your application, showing the relevant content for each "view" without reloading the whole page.
+
+For example, when a user clicks on a link that points to example.com/#/page2, the router will recognize the change in the hash and display the content associated with "page2" without triggering a full page reload. This creates a faster and more seamless user experience, similar to navigating between traditional web pages.
+
+To summarize, createHashRouter is a client-side routing tool that uses the hash part of the URL to manage navigation within a single-page application. It allows for dynamic content changes without full page reloads, resulting in a smoother user experience and better performance for modern web applications.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+●Q.) - how is createHashRouter different from createBrowserRouter and which one is better?
+
+Ans.)`createHashRouter` and `createBrowserRouter` are both routing solutions used in single-page applications (SPAs) to manage navigation on the client-side without full page reloads. However, they differ in how they handle the URLs and how they interact with the browser's history.
+
+1. `createHashRouter`:
+   - Uses the hash part of the URL (after the '#' symbol) to represent different views or states of the application.
+   - URLs look like: `example.com/#/page1`, `example.com/#/page2`, etc.
+   - Changes to the hash don't trigger a full page reload, but JavaScript in the app listens for hash changes and updates the view accordingly.
+   - Older browsers that do not support modern JavaScript features can still work with hash-based routing.
+   - Has the advantage of being simple to set up and works reliably in most scenarios.
+
+2. `createBrowserRouter`:
+   - Uses the browser's History API to handle navigation and represent different views or states of the application with regular URLs.
+   - URLs look like: `example.com/page1`, `example.com/page2`, etc.
+   - Changes to the URL trigger requests to the server, but if the server is configured correctly, it can be set up to handle such requests without full page reloads.
+   - Provides cleaner and more user-friendly URLs without the hash symbol.
+   - Requires the server to be configured properly to handle client-side routing, and it may require additional setup to work correctly in certain scenarios.
+
+Which one is better depends on your specific use case and requirements:
+
+- If you are building a simple SPA or working with limited server configuration, `createHashRouter` might be the easier and more straightforward option. It's also more compatible with older browsers that lack support for the History API.
+
+- If you have more control over the server configuration, want cleaner URLs without the hash symbol, and are looking for a more sophisticated routing solution, `createBrowserRouter` might be the better choice.
+
+In general, both routers serve the same fundamental purpose of enabling client-side routing and providing a smooth user experience in SPAs. Your choice between them should be based on your project's specific needs, server capabilities, and your familiarity with the respective routing methods.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Q.) Why can't we have the callback function of useEffect async?
+
+Ans.) In JavaScript, when we use the `async` keyword with a function, it means that the function will automatically return a Promise. A Promise is a special object that represents the eventual completion or failure of an asynchronous operation and allows us to handle its result.
+
+Now, let's talk about the function we give to `useEffect`. When you use `useEffect`, you need to provide it with a function that either returns nothing or a cleanup function. A cleanup function is just a way to clean up any resources or subscriptions that the effect might have created.
+
+Here's the important part: When React runs the function you provide to `useEffect`, it expects that function to either return nothing or return a cleanup function. It does not expect the function to return a Promise.
+
+If we directly use `async` with the `useEffect` function like this:
+
+```javascript
+useEffect(async () => {
+  // Some time-consuming task, like fetching data from a server
+  const data = await fetch('https://example.com/api/data');
+  // Do something with the data
+}, [/* dependencies */]);
+```
+
+The problem is that this function now returns a Promise (due to the `async` keyword). React doesn't understand how to handle this Promise as it's expecting either nothing or a cleanup function. It doesn't know how to interpret the Promise for cleanup purposes.
+
+To avoid this confusion, we can't directly use `async` in the function provided to `useEffect`. Instead, we create a separate `async` function inside `useEffect`, and then we call that function immediately. This way, the function passed to `useEffect` still returns either nothing or a cleanup function, and there's no confusion for React.
+
+Here's the correct way:
+
+```javascript
+useEffect(() => {
+  const fetchData = async () => {
+    // Some time-consuming task, like fetching data from a server
+    const data = await fetch('https://example.com/api/data');
+    // Do something with the data
+  };
+
+  fetchData(); // Call the async function immediately
+
+  // The function provided to useEffect still returns nothing or a cleanup function.
+}, [/* dependencies */]);
+```
+
+By structuring the code in this way, React is happy, and we can still perform our asynchronous tasks inside `useEffect` using the `async` function without causing any issues.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q.) How to cleanup code or call componentWillUnmount() in functional component?
+Ans.) In functional components, you can achieve cleanup or perform actions equivalent to `componentWillUnmount` using the `useEffect` hook. When you return a function from the `useEffect` callback, React will treat it as the cleanup function, which will be executed when the component is unmounted or before the effect runs again (if the dependencies change).
+
+Here's how you can do cleanup in a functional component using `useEffect`:
+
+```javascript
+import { useEffect } from 'react';
+
+const MyComponent = () => {
+  useEffect(() => {
+    // Code to run when the component is mounted
+
+    return () => {
+      // Code to clean up or perform componentWillUnmount equivalent actions
+      // This will run when the component is unmounted
+    };
+  }, [/* dependencies */]);
+
+  return (
+    <div>
+      {/* Component JSX */}
+    </div>
+  );
+};
+```
+
+In the example above, we pass a function to `useEffect`, which contains the code to run when the component is mounted. Then, we return another function from the same `useEffect` callback. This returned function is the cleanup function that will be executed when the component is unmounted.
+
+The cleanup function is optional and can be used to release resources, cancel subscriptions, remove event listeners, or perform any other necessary cleanup tasks to avoid memory leaks and ensure that your component behaves correctly.
+
+Keep in mind that if you pass an empty dependency array (`[]`) as the second argument to `useEffect`, the effect will run only once when the component is mounted, and the cleanup function will be executed when the component is unmounted. If you include dependencies in the array, the effect will run whenever the dependencies change, and the cleanup function will be executed before the next effect run.
+
+By using the `useEffect` hook with the cleanup function, you can manage side effects effectively in functional components, just like `componentWillUnmount` in class components.
+
