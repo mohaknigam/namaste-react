@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import myImage from "../assets/images/foozo.png";
+import useOnline from "../utils/useOnline";
 
 const Title = () => (
   <a href="/">
@@ -11,6 +12,7 @@ const Title = () => (
 const HeaderComponent = () => {
   const [buttonText, setButtonText] = useState("Login");
   const [loggedInUser, setLoggedInUser] = useState(false);
+  const isOnline = useOnline();
   const toggleLoggedInUser = () => {
     setLoggedInUser(!loggedInUser);
     loggedInUser ? setButtonText("Logout") : setButtonText("Login");
@@ -28,9 +30,13 @@ const HeaderComponent = () => {
         <Link to="./contact">
           <li>Contact</li>
         </Link>
+        <Link to="./instamart">
+          <li>Instamart</li>
+        </Link>
 
         <li>Cart</li>
       </ul>
+      {isOnline ? "❤️" : "💀"}
       {<button onClick={toggleLoggedInUser}>{buttonText}</button>}
     </div>
   );

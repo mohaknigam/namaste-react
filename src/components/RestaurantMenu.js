@@ -1,36 +1,21 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IMG_CDN_URL } from "../constants";
 import Shimmer from "./Shimmer";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
 
+/* 
+The automatic rendering behavior you are observing is due to the usage of the useParams hook from react-router-dom in your RestaurantMenu component. The useParams hook allows your component to access the dynamic parts of the current URL, in this case, the id parameter.
+
+When the id parameter in the URL changes, the useParams hook will detect the change and trigger a re-render of the RestaurantMenu component. This is the expected behavior because React components re-render whenever there are changes in their props or state. In this case, the id parameter is part of the component's props since it's accessed via the useParams hook.
+*/
 const RestaurantMenu = () => {
   const params = useParams();
   console.log(params);
   const { id } = params;
 
-  const [restaurant, setRestaurant] = useState({});
-  const [menu, setMenu] = useState([]);
+  const { restaurant, menu } = useRestaurantMenu(id);
 
-  useEffect(() => {
-    getRestaurantInfo();
-  }, []);
-
-  async function getRestaurantInfo() {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=26.449923&lng=80.3318736&restaurantId=" +
-        id +
-        "&catalog_qa=undefined&submitAction=ENTER"
-    );
-
-    const json = await data.json();
-
-    setRestaurant(json?.data?.cards[0]?.card?.card?.info);
-    setMenu(
-      json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[7]?.card
-        ?.card?.itemCards
-    );
-    console.log(menu);
-  }
+  console.log("render - Re=Ms");
 
   return menu?.length === 0 ? (
     <Shimmer />

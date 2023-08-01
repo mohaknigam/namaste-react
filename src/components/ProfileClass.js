@@ -7,12 +7,18 @@ class ProfileClass extends React.Component {
     this.state = {
       count: 0,
     };
-
-    console.log("constructor");
   }
 
   componentDidMount() {
     console.log("CDM");
+  }
+
+  componentDidUpdate() {
+    console.log("CDidUpdate");
+  }
+
+  componentWillUnmount() {
+    console.log("unmount");
   }
 
   render() {

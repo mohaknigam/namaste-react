@@ -1,0 +1,64 @@
+
+--> In refrence to useOnline hook
+
+
+Let's break down the process step by step:
+
+The component calls the useOnline hook to get the isOnline state value.
+
+The useOnline hook sets up event listeners during its initial execution to listen for online/offline events.
+
+When an online/offline event occurs in the browser, the corresponding event listener function inside the useOnline hook is executed.
+
+Inside the event listener function, you call setIsOnline to update the state with a new value (true for "online" event and false for "offline" event).
+
+When setIsOnline is called, React schedules a re-render of the component that called the useOnline hook (not the useOnline hook itself).
+
+After the component re-renders, the useOnline hook is called again, and the whole process starts over.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+You are correct that the `useEffect` hook with an empty dependency array (`[]`) will run only once after the initial render. However, the event listeners you are adding inside the `useEffect` hook are not directly dependent on the `isOnline` state.
+
+In your custom hook, the event listeners are bound to the "online" and "offline" events of the `window` object. These events are not tied to the `isOnline` state variable; instead, they are triggered by the browser's network status changes.
+
+When the browser detects that the internet connection status has changed (i.e., from online to offline or vice versa), it will fire the corresponding "online" or "offline" event. These events are external to React's state management, and they will trigger the event handler functions you provided, updating the `isOnline` state variable accordingly.
+
+The `isOnline` state is initialized as `true`, and your event listeners will update it when the "online" or "offline" events occur. Since these events are external to React's rendering cycle, they can update the state variable even if the `useEffect` hook has already run and won't run again due to the empty dependency array.
+
+So, your custom hook will correctly keep track of the online/offline status by updating the `isOnline` state variable whenever the "online" or "offline" events are triggered, even if the `useEffect` hook has already executed.
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+State Change and Re-render: Whenever you call setIsOnline to update the state with a new value, React will schedule a re-render of the component using the custom hook. This is the core mechanism of how React components respond to state changes and update the UI.
+
+When the state is updated using setIsOnline, it triggers a re-render of the component that called the useOnline hook, not the useOnline hook itself.
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q.) Explain the above process thoroughly?
+Ans.) The process you described, where React schedules a re-render of the component after a state update, is known as "React's Reconciliation" or "Reconciliation Process."
+
+Reconciliation is a core mechanism in React that compares the current Virtual DOM representation of a component with the previous one to calculate the minimum changes needed to update the actual DOM. When state changes occur, components need to be updated to reflect those changes in the UI.
+
+Here's a step-by-step explanation of the process:
+
+1. Component State Update: When you call `setIsOnline(true)` or `setIsOnline(false)` to update the `isOnline` state in the `useOnline` custom hook, React marks the component as "dirty" to indicate that it needs to be updated.
+
+2. Reconciliation Process: After a state update, React begins the reconciliation process. It compares the new Virtual DOM representation of the component (after the state change) with the previous Virtual DOM representation (before the state change).
+
+3. Diffing Algorithm: React's reconciliation process uses a diffing algorithm to find the minimal set of changes needed to update the actual DOM to reflect the changes in the Virtual DOM. This algorithm is efficient and helps optimize the performance of React applications.
+
+4. DOM Update: Once the minimal changes are calculated, React applies those changes to the actual DOM, updating the visible UI on the screen.
+
+5. Re-Render: After the DOM update is complete, React re-renders the component, and any part of the UI that depends on the updated state will reflect the new values.
+
+This entire process of updating the component after a state change, from updating the Virtual DOM to applying changes to the actual DOM and re-rendering the component, is collectively known as "React's Reconciliation Process."
+
+React's reconciliation is a critical part of how React efficiently manages UI updates and ensures that the user interface accurately reflects the application's state changes. It helps keep the DOM in sync with the component's state and allows for fast and optimized rendering of React applications.
+
