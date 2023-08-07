@@ -47,6 +47,7 @@ const BodyComponent = () => {
         <input
           type="text"
           value={user.name}
+          className="border-none"
           onChange={(e) => setUser({ ...user, name: e.target.value })}
         />
         <input

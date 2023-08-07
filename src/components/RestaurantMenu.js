@@ -1,7 +1,10 @@
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { IMG_CDN_URL } from "../constants";
 import Shimmer from "./Shimmer";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem, removeItem } from "../utils/cartSlice";
 
 /* 
 The automatic rendering behavior you are observing is due to the usage of the useParams hook from react-router-dom in your RestaurantMenu component. The useParams hook allows your component to access the dynamic parts of the current URL, in this case, the id parameter.
@@ -10,12 +13,20 @@ When the id parameter in the URL changes, the useParams hook will detect the cha
 */
 const RestaurantMenu = () => {
   const params = useParams();
-  console.log(params);
   const { id } = params;
 
   const { restaurant, menu } = useRestaurantMenu(id);
 
-  console.log("render - Re=Ms");
+  const cartItems = useSelector((store) => store.cart.items);
+
+  useEffect(() => {
+    console.log(cartItems);
+  }, [cartItems]);
+  const dispatch = useDispatch();
+
+  const handleAddClick = (item) => {
+    dispatch(addItem(item));
+  };
 
   return menu?.length === 0 ? (
     <Shimmer />
@@ -36,7 +47,19 @@ const RestaurantMenu = () => {
         <h1>Menu</h1>
         <ul>
           {menu?.map((item) => {
-            return <li key={item?.card?.info?.id}>{item?.card?.info?.name}</li>;
+            return (
+              <li key={item?.card?.info?.id}>
+                <div className="flex items-center">
+                  {item?.card?.info?.name}{" "}
+                  <button
+                    className="bg-green-200 m-5 p-1"
+                    onClick={() => handleAddClick(item)}
+                  >
+                    Add
+                  </button>
+                </div>
+              </li>
+            );
           })}
         </ul>
       </div>

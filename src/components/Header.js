@@ -39,8 +39,10 @@ const HeaderComponent = () => {
           </li>
         </Link>
 
-        <Link>
-          <li className="px-3 shadow-sm hover:shadow-lg font-bold">Cart</li>
+        <Link to="./cart">
+          <li className="px-3 shadow-sm hover:shadow-lg font-bold ml-10 bg-gray-700 text-white">
+            🛒 Cart
+          </li>
         </Link>
       </ul>
       <div className="flex justify-between mr-12 mt-16 h-15">
